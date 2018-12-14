@@ -131,24 +131,42 @@ public class UserInterfaz extends AppCompatActivity{
         String Archivos[] = fileList();
         if(ArchivoExiste(Archivos,"Datos.txt")){
             Toast.makeText(UserInterfaz.this,"SI", Toast.LENGTH_SHORT).show();
-            try {
-                InputStreamReader archivo = new InputStreamReader(openFileInput("Datos.txt"));
-                BufferedReader br = new BufferedReader(archivo);
-                Proyeccion= br.readLine();
-
-                //int s=Proyeccion.indexOf("#");
-
-            }catch (IOException e){
-
-            }
-            valor=Double.valueOf(Proyeccion.substring(0,Proyeccion.indexOf("#")));
-            unidad=Proyeccion.substring(Proyeccion.indexOf("#")+1,Proyeccion.indexOf("*"));
-            Toast.makeText(UserInterfaz.this,unidad, Toast.LENGTH_SHORT).show();
-
 
         }else {
-            Toast.makeText(UserInterfaz.this,"NO", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(UserInterfaz.this,"NO", Toast.LENGTH_SHORT).show();
+            try {
+                OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Datos.txt", Activity.MODE_PRIVATE));
+
+                archivo.write("0");
+                archivo.write("#");
+                archivo.write("$");
+                archivo.write("*");
+                archivo.flush();
+                archivo.close();
+
+            } catch (IOException e) {
+
+            }
+
+            Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
+
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        try {
+            InputStreamReader archivo = new InputStreamReader(openFileInput("Datos.txt"));
+            BufferedReader br = new BufferedReader(archivo);
+            Proyeccion= br.readLine();
+
+            //int s=Proyeccion.indexOf("#");
+
+        }catch (IOException e){
+
+        }
+        valor=Double.valueOf(Proyeccion.substring(0,Proyeccion.indexOf("#")));
+        unidad=Proyeccion.substring(Proyeccion.indexOf("#")+1,Proyeccion.indexOf("*"));
+        Toast.makeText(UserInterfaz.this,unidad, Toast.LENGTH_SHORT).show();
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -180,10 +198,10 @@ public class UserInterfaz extends AppCompatActivity{
 
                                 switch (unidad) {
                                     case "$":
-                                       // int D = (int) (wattactual*100.0/valor);
+                                        // int D = (int) (wattactual*100.0/valor);
                                         progressBar.setProgress((int) (wattactual*100.0/valor));
                                     case "kWh":
-                                      //  int D = (int) (cost*100.0/valor);
+                                        //  int D = (int) (cost*100.0/valor);
                                         progressBar.setProgress((int) (cost*100.0/valor));
                                 }
 
