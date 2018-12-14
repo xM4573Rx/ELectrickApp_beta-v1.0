@@ -25,7 +25,6 @@
             android:label="@string/screen_name"
             android:parentActivityName=".UserInterfaz">
         </activity>
-        <activity android:name=".Proyeccion" />
     </application>
 
 </manifest>

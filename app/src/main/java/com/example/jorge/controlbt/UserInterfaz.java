@@ -1,9 +1,12 @@
 package com.example.jorge.controlbt;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,13 +22,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
 import java.util.UUID;
 
-public class UserInterfaz extends AppCompatActivity {
+public class UserInterfaz extends AppCompatActivity{
 
     //1)
 
@@ -144,7 +151,14 @@ public class UserInterfaz extends AppCompatActivity {
                                 tv2.setText(ActualWatt + " KWh");
                                 tv3.setText("$ " + Costtext);
 
-                                //applyText("","");
+                                /*try {
+                                    OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Datos.txt", Activity.MODE_PRIVATE));
+                                    archivo.write(ActualWatt);
+                                    archivo.flush();
+                                    archivo.close();
+                                } catch (IOException e) {
+
+                                }*/
 
                             }else{
                                 Toast.makeText(UserInterfaz.this,"MODULO SIN ALIMENTACION", Toast.LENGTH_SHORT).show();
@@ -158,6 +172,26 @@ public class UserInterfaz extends AppCompatActivity {
                 }
             }
         };
+
+        String archivos [] = fileList();
+
+        if (ArchivoExiste(archivos, "Datos.txt")) {
+            try {
+                InputStreamReader archivo = new InputStreamReader(openFileInput("Datos.txt"));
+                BufferedReader br = new BufferedReader(archivo);
+                String linea = br.readLine();
+                String AllData = "";
+
+                while(linea != null) {
+                    AllData = AllData + linea + "\n";
+                    linea = br.readLine();
+                }
+                br.close();
+                archivo.close();
+            } catch (IOException e) {
+
+            }
+        }
     }
 
     @Override
@@ -169,6 +203,13 @@ public class UserInterfaz extends AppCompatActivity {
             // que no se deje abierto el socket
             btSocket.close();
         } catch (IOException e2) {}
+    }
+
+    private boolean ArchivoExiste(String archivos [], String FileName) {
+        for(int i = 0; i < archivos.length; i++)
+            if(FileName.equals(archivos[i]))
+                return true;
+        return false;
     }
 
     //Comprueba que el dispositivo Bluetooth Bluetooth está disponible y solicita que se active si está desactivado

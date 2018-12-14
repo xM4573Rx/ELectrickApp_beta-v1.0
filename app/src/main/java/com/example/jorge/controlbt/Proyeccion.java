@@ -17,7 +17,7 @@ public class Proyeccion extends AppCompatDialogFragment {
 
     private EditText editTextValue;
     private Spinner spinner;
-    public ProjectionListener listener;
+    private ExampleDialogListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class Proyeccion extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String value = editTextValue.getText().toString();
                         String selector = spinner.getSelectedItem().toString();
+                        listener.applyText(selector, value);
                     }
                 });
 
@@ -52,7 +53,18 @@ public class Proyeccion extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    public interface ProjectionListener {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (ExampleDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "Must implement ExampleDialogListener");
+        }
+    }
+
+    public interface ExampleDialogListener {
         void applyText(String selection, String number);
     }
 }
