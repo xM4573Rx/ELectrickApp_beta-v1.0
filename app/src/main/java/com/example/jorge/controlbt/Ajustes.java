@@ -56,9 +56,11 @@ public class Ajustes extends AppCompatActivity  implements Proyeccion.ExampleDia
 
         try {
             OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Datos.txt", Activity.MODE_PRIVATE));
+
             archivo.write(number);
-            archivo.write(" ");
+            archivo.write("#");
             archivo.write(selection);
+            archivo.write("*");
             archivo.flush();
             archivo.close();
         } catch (IOException e) {

@@ -41,10 +41,14 @@ public class UserInterfaz extends AppCompatActivity{
     public String ActualWatt;
     public String Costtext;
     public String Watts;
+    public String Proyeccion;
+    public String unidad;
 
     public double cost;
     public double wattactual;
     public double costwatt;
+    public double valor;
+
 
     TextView watts;
     TextView tv1, tv2, tv3;
@@ -123,6 +127,29 @@ public class UserInterfaz extends AppCompatActivity{
         MyConexionBT = new ConnectedThread(btSocket);
         MyConexionBT.start();
 
+
+        String Archivos[] = fileList();
+        if(ArchivoExiste(Archivos,"Datos.txt")){
+            Toast.makeText(UserInterfaz.this,"SI", Toast.LENGTH_SHORT).show();
+            try {
+                InputStreamReader archivo = new InputStreamReader(openFileInput("Datos.txt"));
+                BufferedReader br = new BufferedReader(archivo);
+                Proyeccion= br.readLine();
+
+                //int s=Proyeccion.indexOf("#");
+
+            }catch (IOException e){
+
+            }
+            valor=Double.valueOf(Proyeccion.substring(0,Proyeccion.indexOf("#")));
+            unidad=Proyeccion.substring(Proyeccion.indexOf("#")+1,Proyeccion.indexOf("*"));
+            Toast.makeText(UserInterfaz.this,unidad, Toast.LENGTH_SHORT).show();
+
+
+        }else {
+            Toast.makeText(UserInterfaz.this,"NO", Toast.LENGTH_SHORT).show();
+        }
+
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == handlerState) {
@@ -151,15 +178,16 @@ public class UserInterfaz extends AppCompatActivity{
                                 tv2.setText(ActualWatt + " KWh");
                                 tv3.setText("$ " + Costtext);
 
-                                /*try {
-                                    OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("Datos.txt", Activity.MODE_PRIVATE));
-                                    archivo.write(ActualWatt);
-                                    archivo.flush();
-                                    archivo.close();
-                                } catch (IOException e) {
+                                switch (unidad) {
+                                    case "$":
+                                       // int D = (int) (wattactual*100.0/valor);
+                                        progressBar.setProgress((int) (wattactual*100.0/valor));
+                                    case "kWh":
+                                      //  int D = (int) (cost*100.0/valor);
+                                        progressBar.setProgress((int) (cost*100.0/valor));
+                                }
 
-                                }*/
-
+                                //Toast.makeText(UserInterfaz.this,"MODULO " + D, Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(UserInterfaz.this,"MODULO SIN ALIMENTACION", Toast.LENGTH_SHORT).show();
                             }
