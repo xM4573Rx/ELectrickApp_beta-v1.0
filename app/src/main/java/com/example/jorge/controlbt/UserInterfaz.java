@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,9 +52,11 @@ public class UserInterfaz extends AppCompatActivity{
     public double costwatt;
     public double valor;
 
+    public int Porcentaje=0;
+    public double Aux=0.0;
 
     TextView watts;
-    TextView tv1, tv2, tv3;
+    TextView tv1, tv2, tv3, tv4, tv5, tv6;
     ProgressBar progressBar;
 
     //-------------------------------------------
@@ -80,6 +84,9 @@ public class UserInterfaz extends AppCompatActivity{
         tv1 = (TextView) findViewById(R.id.IdBufferIn);
         tv2 = (TextView) findViewById(R.id.textView2);
         tv3 = (TextView) findViewById(R.id.textView7);
+        tv4 = (TextView) findViewById(R.id.textView3);
+        tv5 = (TextView) findViewById(R.id.WattInstantaneo);
+        tv6 = (TextView) findViewById(R.id.Unidad);
 
         /*recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecyclerViewAdapter());*/
@@ -170,6 +177,24 @@ public class UserInterfaz extends AppCompatActivity{
         //Toast.makeText(UserInterfaz.this,unidad, Toast.LENGTH_SHORT).show();
         ////////////////////////////////////////////////////////////////////////////////////////////
 
+        tv4.setText("Proyección");
+        switch (unidad) {
+            case "kWh":
+                // int D = (int) (wattactual*100.0/valor);
+                //Aux=wattactual;
+
+                tv1.setText(String.valueOf((int) valor));
+                tv6.setText("KWH");
+                break;
+            case "$":
+                //  int D = (int) (cost*100.0/valor);
+                //Aux=cost;
+
+                tv1.setText(String.valueOf((int)valor));
+                tv6.setText("$");
+                break;
+        }
+
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == handlerState) {
@@ -186,27 +211,49 @@ public class UserInterfaz extends AppCompatActivity{
                             Dato=DataStringIN.substring(StartOfLineIndex+1, EndOfLineIndex);//<-<- PARTE A MODIFICAR >->->
                             if(!(Dato.length()<=9)) {
 
-                                Watts = Dato.substring(0, Dato.indexOf("#"));
+                                Watts = String.valueOf(2*Double.valueOf(Dato.substring(0, Dato.indexOf("#"))));
                                 WattHora = Dato.substring(Dato.indexOf("#") + 1, Dato.indexOf("*"));
-                                wattactual = Float.valueOf(WattHora)* 0.001;
+                                wattactual = Float.valueOf(WattHora)* 0.002;
                                 costwatt = 466.14;
                                 cost = wattactual * costwatt;
                                 Costtext = String.valueOf(new DecimalFormat("##.##").format(cost));
                                 ActualWatt = String.valueOf(new DecimalFormat("##.###").format(wattactual));
 
-                                tv1.setText(Watts);
+
                                 tv2.setText(ActualWatt + " KWh");
                                 tv3.setText("$ " + Costtext);
+                                tv5.setText(Watts+" Watt");
 
-                                switch (unidad) {
-                                    case "$":
-                                        // int D = (int) (wattactual*100.0/valor);
-                                        progressBar.setProgress((int) (wattactual*100.0/valor));
-                                    case "kWh":
-                                        //  int D = (int) (cost*100.0/valor);
-                                        progressBar.setProgress((int) (cost*100.0/valor));
+
+                                Porcentaje=(int) (Aux*100/valor);
+                                if(Porcentaje>=100){
+                                    Porcentaje=100;
                                 }
 
+                                switch (unidad) {
+                                    case "kWh":
+                                        // int D = (int) (wattactual*100.0/valor);
+                                        Aux=wattactual;
+                                        //tv4.setText("Proyección (KWh)");
+                                        break;
+                                    case "$":
+                                        //  int D = (int) (cost*100.0/valor);
+                                        Aux=cost;
+                                        //tv4.setText("Proyección ($)");
+                                        break;
+                                }
+
+                                progressBar.setProgress(Porcentaje);
+                                progressBar.getProgressDrawable().setColorFilter(Color.argb(255,(int)(2.55*Porcentaje),(int)(255-2.55*Porcentaje) ,0), PorterDuff.Mode.SRC_IN);
+                                /*
+                                if(Porcentaje>70){
+                                    Toast.makeText(UserInterfaz.this,"MODULO ", Toast.LENGTH_SHORT).show();
+                                   // progressBar.getIndeterminateDrawable().setColorFilter(Color.GRAY, android.graphics.PorterDuff.Mode.MULTIPLY);
+                                    progressBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                                }else{
+                                    progressBar.getProgressDrawable().setColorFilter(Color.argb(255,2*Porcentaje,2*Porcentaje,0), PorterDuff.Mode.SRC_IN);
+                                }*/
                                 //Toast.makeText(UserInterfaz.this,"MODULO " + D, Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(UserInterfaz.this,"MODULO SIN ALIMENTACION", Toast.LENGTH_SHORT).show();
