@@ -13,8 +13,8 @@
         android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="85dp"
-        android:layout_marginTop="197dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="199dp"
         android:drawableBottom="@drawable/ic_mail" />
 
     <TextView
@@ -23,8 +23,8 @@
         android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="86dp"
-        android:layout_marginTop="239dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="237dp"
         android:drawableBottom="@drawable/ic_twitter" />
 
     <TextView
@@ -61,8 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/txt_view_2"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="38dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="69dp"
         android:text="servicio.electrickapp@gmail.com"
         android:textAlignment="center"
         android:textSize="14sp"
