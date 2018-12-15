@@ -2,6 +2,7 @@
     <string name="app_name">ElectrickApp</string>
     <string name="screen_name">Ajustes</string>
     <string name="disp_vinc">DISPOSITIVOS VINCULADOS</string>
+    <string name="twitter">"ElectrickApp</string>
 
     <string-array name="tipe">
         <item>kWh</item>

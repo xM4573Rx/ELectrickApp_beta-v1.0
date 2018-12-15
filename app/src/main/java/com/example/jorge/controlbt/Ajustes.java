@@ -44,6 +44,12 @@ public class Ajustes extends AppCompatActivity  implements Proyeccion.ExampleDia
                     case 0:
                         openProyeccion();
                         break;
+                    case 1:
+                        openContact();
+                        break;
+                    case 2:
+                        openInfo();
+                        break;
                     default:
                         break;
                 }
@@ -67,7 +73,7 @@ public class Ajustes extends AppCompatActivity  implements Proyeccion.ExampleDia
 
         }
 
-        Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
 
         /*Intent i = new Intent(Ajustes.this, UserInterfaz.class);//<-<- PARTE A MODIFICAR >->->
         i.putExtra("selector", selection);
@@ -78,6 +84,16 @@ public class Ajustes extends AppCompatActivity  implements Proyeccion.ExampleDia
         Proyeccion proyeccion = new Proyeccion();
         proyeccion.show(getSupportFragmentManager(), "Proyección");
 
+    }
+
+    public void openContact() {
+        Intent i = new Intent(Ajustes.this, Contact.class);
+        startActivity(i);
+    }
+
+    public void openInfo() {
+        Intent i = new Intent(Ajustes.this, Info.class);
+        startActivity(i);
     }
 
     public void createExampleList() {

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Contact">
+
+    <TextView
+        android:id="@+id/txt_view_2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="197dp"
+        android:drawableBottom="@drawable/ic_mail" />
+
+    <TextView
+        android:id="@+id/txt_view_3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="86dp"
+        android:layout_marginTop="239dp"
+        android:drawableBottom="@drawable/ic_twitter" />
+
+    <TextView
+        android:id="@+id/txt_view_4"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_alignLeft="@+id/txt_view_3"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="280dp"
+        android:drawableBottom="@drawable/ic_instagram" />
+
+    <TextView
+        android:id="@+id/txt_view_5"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignRight="@+id/txt_view_3"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="320dp"
+        android:drawableBottom="@drawable/ic_facebook" />
+
+    <TextView
+        android:id="@+id/txt_view_6"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignLeft="@+id/txt_view_3"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="360dp"
+        android:drawableBottom="@drawable/ic_phone" />
+
+    <TextView
+        android:id="@+id/txt_view_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txt_view_2"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="38dp"
+        android:text="servicio.electrickapp@gmail.com"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_view_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_view_7"
+        android:layout_alignTop="@+id/txt_view_3"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="2dp"
+        android:text="ElectrickApp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_view_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_view_8"
+        android:layout_alignTop="@+id/txt_view_4"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="1dp"
+        android:text="ElectrickApp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_view_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_view_7"
+        android:layout_alignBottom="@+id/txt_view_5"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginBottom="2dp"
+        android:text="ElectrickApp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_view_11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_view_7"
+        android:layout_alignTop="@+id/txt_view_6"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="4dp"
+        android:text="+57 318 309 9390"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_view_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:text="ElectrickApp"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

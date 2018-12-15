@@ -130,7 +130,7 @@ public class UserInterfaz extends AppCompatActivity{
 
         String Archivos[] = fileList();
         if(ArchivoExiste(Archivos,"Datos.txt")){
-            Toast.makeText(UserInterfaz.this,"SI", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(UserInterfaz.this,"SI", Toast.LENGTH_SHORT).show();
 
         }else {
             //Toast.makeText(UserInterfaz.this,"NO", Toast.LENGTH_SHORT).show();
@@ -148,7 +148,7 @@ public class UserInterfaz extends AppCompatActivity{
 
             }
 
-            Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Archivo creado", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -165,7 +165,7 @@ public class UserInterfaz extends AppCompatActivity{
         }
         valor=Double.valueOf(Proyeccion.substring(0,Proyeccion.indexOf("#")));
         unidad=Proyeccion.substring(Proyeccion.indexOf("#")+1,Proyeccion.indexOf("*"));
-        Toast.makeText(UserInterfaz.this,unidad, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(UserInterfaz.this,unidad, Toast.LENGTH_SHORT).show();
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         bluetoothIn = new Handler() {

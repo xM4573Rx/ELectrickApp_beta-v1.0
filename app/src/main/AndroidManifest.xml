@@ -23,8 +23,9 @@
         <activity
             android:name=".Ajustes"
             android:label="@string/screen_name"
-            android:parentActivityName=".UserInterfaz">
-        </activity>
+            android:parentActivityName=".UserInterfaz" />
+        <activity android:name=".Info" />
+        <activity android:name=".Contact"></activity>
     </application>
 
 </manifest>
